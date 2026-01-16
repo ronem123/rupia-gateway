@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: rupia-gateway
+
+server:
+  port: 8090
+  servlet:
+    context-path: /api
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8762/eureka/ #URL of the EUREKA server where the client should register
+    fetch-registry: true                         # Usually true for the client
+    register-with-eureka: true                   # Usually true for the clients
+  instance:
+    instance-id: ${spring.application.name}:${server.port}
+    prefer-ip-address: true                      # Use IP instead of hostname for registration (useful for containers)
+    lease-renewal-interval-in-seconds: 10        # default is 30
+    lease-expiration-duration-in-seconds: 30     # default is 90
+
+management:
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
