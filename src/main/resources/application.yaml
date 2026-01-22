@@ -10,9 +10,13 @@ server:
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8762/eureka/ #URL of the EUREKA server where the client should register
-    fetch-registry: true                         # Usually true for the client
-    register-with-eureka: true                   # Usually true for the clients
+      #URL of the EUREKA server where the client should register
+      # since our rupia-discovery-server microservice is running inside the docker container
+      # we need to give docker container name to the defaultZone
+      # we cannot give localhost to it as localhost will be container's localhost not of the machine localhost
+      defaultZone: http://rupia-discovery-server:8762/eureka/
+    fetch-registry: true
+    register-with-eureka: true
   instance:
     instance-id: ${spring.application.name}:${server.port}
     prefer-ip-address: true                      # Use IP instead of hostname for registration (useful for containers)
