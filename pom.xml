@@ -28,12 +28,42 @@
     </scm>
     <properties>
         <java.version>21</java.version>
-        <spring-cloud.version>2025.1.0</spring-cloud.version>
+        <spring-cloud.version>2024.0.0</spring-cloud.version>
     </properties>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-webmvc</artifactId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!--Spring Security-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- CORRECT: Spring Cloud Gateway (Reactive) -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-gateway</artifactId>
+        </dependency>
+
+        <!-- WebFlux (comes with Gateway, but explicit for clarity) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
         </dependency>
 
         <dependency>
@@ -58,6 +88,7 @@
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
+
     </dependencies>
 
     <dependencyManagement>
@@ -69,24 +100,9 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-
-            <!--			<dependency>-->
-            <!--				<groupId>com.fasterxml.jackson.core</groupId>-->
-            <!--				<artifactId>jackson-databind</artifactId>-->
-            <!--			</dependency>-->
-
-            <!--			<dependency>-->
-            <!--				<groupId>com.fasterxml.jackson.core</groupId>-->
-            <!--				<artifactId>jackson-core</artifactId>-->
-            <!--			</dependency>-->
-
-            <!--			<dependency>-->
-            <!--				<groupId>com.fasterxml.jackson.core</groupId>-->
-            <!--				<artifactId>jackson-annotations</artifactId>-->
-            <!--			</dependency>-->
-
         </dependencies>
     </dependencyManagement>
+
 
     <build>
         <plugins>
