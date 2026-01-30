@@ -1,34 +1,35 @@
 spring:
+  main:
+    web-application-type: reactive
   application:
     name: rupia-gateway
 
+  cloud:
+    gateway:
+      routes:
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/api/users/**
+          filters:
+            - StripPrefix=1
+
 server:
   port: 8090
-  servlet:
-    context-path: /api
 
 eureka:
   client:
-    service-url:
-      #URL of the EUREKA server where the client should register
-      # since our rupia-discovery-server microservice is running inside the docker container
-      # we need to give docker container name to the defaultZone
-      # we cannot give localhost to it as localhost will be container's localhost not of the machine localhost
-      defaultZone: http://rupia-discovery-server:8762/eureka/
     fetch-registry: true
     register-with-eureka: true
   instance:
     instance-id: ${spring.application.name}:${server.port}
-    prefer-ip-address: true                      # Use IP instead of hostname for registration (useful for containers)
-    lease-renewal-interval-in-seconds: 10        # default is 30
-    lease-expiration-duration-in-seconds: 30     # default is 90
+    prefer-ip-address: true
 
 management:
   endpoints:
     web:
-      base-path: /actuator
       exposure:
-        include: health,info
+        include: health,info,gateway,routes
   endpoint:
-    health:
-      show-details: always
+    gateway:
+      enabled: true

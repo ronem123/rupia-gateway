@@ -1,0 +1,13 @@
+eureka:
+  client:
+    service-url:
+      #URL of the EUREKA server where the client should register
+      # since our rupia-discovery-server microservice is running inside the docker container
+      # we need to give docker container name to the defaultZone
+      # we cannot give localhost to it as localhost will be container's localhost not of the machine localhost
+      defaultZone: http://rupia-discovery-server:8762/eureka/
+
+  instance:
+    hostname: rupia-auth-service
+    prefer-ip-address: false
+
