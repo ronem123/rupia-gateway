@@ -6,7 +6,7 @@ eureka:
     register-with-eureka: true
   instance:
     hostname: localhost
-    prefer-ip-address: true  # Fixed typo from prefer-id-address
+    prefer-ip-address: true
 
 spring:
   cloud:
@@ -16,6 +16,37 @@ spring:
         locator:
           enabled: true
           lower-case-service-id: true
+      routes:
+        #Route to rupia-auth-service microservice if the path matches /auth/**
+        - id: rupia-auth-service
+          uri: lb://rupia-auth-service
+          predicates:
+            - Path=/auth/**
+
+        #Route to rupia-admin-service microservice if the path matches /admin/**
+        - id: rupia-admin-service
+          uri: lb://rupia-admin-service
+          predicates:
+            - Path=/admin/**
+
+        #Route to rupia-customer-service microservice if the path matches /customer/**
+        - id: rupia-customer-service
+          uri: lb://rupia-customer-service
+          predicates:
+            - Path=/customer/**
+
+        #Route to rupia-wallet-service microservice if the path matches /wallet/**
+        - id: rupia-wallet-service
+          uri: lb://rupia-wallet-service
+          predicates:
+            - Path=/wallet/**
+
+        #Route to rupia-transaction-service microservice if the path matches /transaction/**
+        - id: rupia-transaction-service
+          uri: lb://rupia-transaction-service
+          predicates:
+            - Path=/transaction/**
+
 
 logging:
   level:

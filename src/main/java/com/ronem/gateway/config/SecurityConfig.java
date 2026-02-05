@@ -24,18 +24,12 @@ public class SecurityConfig {
         return http
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)
                 .authorizeExchange(authorizeExchangeSpec -> authorizeExchangeSpec
-                        //public endpoints
-                        .pathMatchers("/actuator/**").permitAll()
-//                        .pathMatchers("api/auth/**").permitAll()
-//                        .pathMatchers("/api/public/**").permitAll()
-//
-//                        //protected endpoints
-//                        .pathMatchers("/api/users/**").authenticated()
-//                        .pathMatchers("/api/payments/**").authenticated()
-//                        .pathMatchers("api/orders/**").authenticated()
-
-                        //All other requests
-                        .anyExchange().authenticated()
+                        .pathMatchers(
+                                "/auth/**",
+                                "/customer/login/**",
+                                "customer/register/**"
+                        ).permitAll()
+                        .anyExchange().permitAll()
                 ).build();
     }
 }
