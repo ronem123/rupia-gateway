@@ -14,7 +14,7 @@ spring:
       # Development-specific routes or overrides
       discovery:
         locator:
-          enabled: true
+          enabled: false
           lower-case-service-id: true
       routes:
         #Route to rupia-auth-service microservice if the path matches /auth/**
