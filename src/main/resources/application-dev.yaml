@@ -30,8 +30,8 @@ spring:
             - Path=/admin/**
 
         #Route to rupia-customer-service microservice if the path matches /customer/**
-        - id: rupia-customer-service
-          uri: lb://rupia-customer-service
+        - id: rupia-customer
+          uri: lb://rupia-customer
           predicates:
             - Path=/customer/**
 

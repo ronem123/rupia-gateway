@@ -52,8 +52,6 @@ public class JwtAuthenticationGlobalFilter implements GlobalFilter, Ordered {
     );
 
 
-
-
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
 
@@ -63,6 +61,7 @@ public class JwtAuthenticationGlobalFilter implements GlobalFilter, Ordered {
 
 
         log.info("GlobalFilter: {} {}", method, path);
+        log.info("Adding internal secret header to request {}", exchange.getRequest().getURI());
 
         // remove the blacklisted headers from client first
         ServerHttpRequest.Builder requestBuilder = request.mutate();
